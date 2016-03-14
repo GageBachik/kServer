@@ -2,63 +2,56 @@
 	<head>
 		<script src="https://www.youtube.com/iframe_api"></script>
 		<script>
+			var ytPlayer;
+			var queue = [];
 
-		var ytPlayer;
-		var queue = [];
+			function onYouTubeIframeAPIReady() {
+				ytPlayer = new YT.Player('ytPlayer', {
 
-		function onYouTubeIframeAPIReady() {
-			ytPlayer = new YT.Player('ytPlayer', {
+					videoId: 'vxIOUJ7by6U',
+					playerVars: {
+						fs: 0, // does not show the fullscreen button
+						rel: 0, // does not show related videos at the end
+						modestbranding: 1,
+						iv_load_policy: 3, // annotations not shown by default
+						controls: 0 // disables controls
+					},
+					events: {
+						'onReady': onPlayerReady,
+						// 'onStateChange': onPlayerStateChange,
+						'onError': onError
+					}
+				} );
 
-				videoId: 'vxIOUJ7by6U',
-				playerVars: {
-					fs: 0, // does not show the fullscreen button
-					rel: 0, // does not show related videos at the end
-					modestbranding: 1,
-					iv_load_policy: 3, // annotations not shown by default
-					controls: 0 // disables controls
-				},
-				events: {
-					'onReady': onPlayerReady,
-					// 'onStateChange': onPlayerStateChange,
-					'onError': onError
-				}
-			} );
-
-		}
-		function onPlayerReady(){
-			// If after adding a song, the player isn't playing, start it
-			if ( ytPlayer.getPlayerState() != 1 && queue.length > 0) { // YT.PlayerState.PLAYING == 1
-				ytPlayer.loadVideoById( queue.splice(0,1), 0, "auto" );
-				ytPlayer.playVideo();
 			}
-		}
-		function onError(event) {
-			console.log("event:", event);
-			console.log('There was an error so we re-loaded the video.')
-			queue.push(event.target.F.videoData.video_id)
-		}
+			function onPlayerReady(){
+				// If after adding a song, the player isn't playing, start it
+				// if ( ytPlayer.getPlayerState() != 1 && queue.length > 0) { // YT.PlayerState.PLAYING == 1
+				// 	ytPlayer.loadVideoById( queue.splice(0,1), 0, "auto" );
+				// 	ytPlayer.playVideo();
+				// }
+			}
+			function onError(event) {
+				console.log("event:", event);
+				// console.log('There was an error so we re-loaded the video.')
+				// queue.push(event.target.F.videoData.video_id)
+			}
 
-		function mute() { return ytPlayer.mute(); }
+			function mute() { return ytPlayer.mute(); }
 
-		function unMute() { return ytPlayer.unMute(); }
+			function unMute() { return ytPlayer.unMute(); }
 
-		function isMuted() { return ytPlayer.isMuted(); }
+			function isMuted() { return ytPlayer.isMuted(); }
 
-		function setVolume(vol) { return ytPlayer.setVolume(vol); }
+			function setVolume(vol) { return ytPlayer.setVolume(vol); }
 
-		function getVolume() { return ytPlayer.getVolume(); }
+			function getVolume() { return ytPlayer.getVolume(); }
 
-		function playVideo() { return ytPlayer.playVideo(); }
+			function playVideo() { return ytPlayer.playVideo(); }
 
-		function loadVideoById(id, startSeconds, quality) { return ytPlayer.loadVideoById(id, startSeconds, quality); }
+			function loadVideoById(id, startSeconds, quality) { return ytPlayer.loadVideoById(id, startSeconds, quality); }
 
-		function getPlayerState() { return ytPlayer.getPlayerState(); }
-		// YT.PlayerState.(unstarted?) == -1
-		// YT.PlayerState.ENDED == 0
-		// YT.PlayerState.PLAYING == 1
-		// YT.PlayerState.PAUSED == 2
-		// YT.PlayerState.BUFFERING == 3
-		// YT.PlayerState.CUED == 5
+			function getPlayerState() { return ytPlayer.getPlayerState(); }
 		</script>
 	</head>
 	<body style="width: 100vw; height: 100vh; padding: 0; margin: 0;">
