@@ -15,8 +15,7 @@
 					rel: 0, // does not show related videos at the end
 					modestbranding: 1,
 					iv_load_policy: 3, // annotations not shown by default
-					controls: 0, // disables controls
-					enablejsapi: 1 // be controlled via apis
+					controls: 0 // disables controls
 				},
 				events: {
 					'onReady': onPlayerReady,
@@ -28,7 +27,7 @@
 		}
 		function onPlayerReady(){
 			// If after adding a song, the player isn't playing, start it
-			if ( ytPlayer.getPlayerState() != 1 ) { // YT.PlayerState.PLAYING == 1
+			if ( ytPlayer.getPlayerState() != 1 && queue.length > 0) { // YT.PlayerState.PLAYING == 1
 				ytPlayer.loadVideoById( queue.splice(0,1), 0, "auto" );
 				ytPlayer.playVideo();
 			}
