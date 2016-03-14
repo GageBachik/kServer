@@ -26,12 +26,11 @@
 
 		}
 
-		function onPlayerReady() {
-			console.log('Youtube player ready <3!');
-		}
-
 		function onError(event) {
-			console.log("YT Player error event:", event);
+			console.log("event:", event);
+			console.log("event.target.f.videoData.video_id:", event.target.f.videoData.video_id);
+			ytPlayer.loadVideoById( event.target.f.videoData.video_id, 0, "auto" );
+			ytPlayer.playVideo();
 		}
 
 		function mute() { return ytPlayer.mute(); }
