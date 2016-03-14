@@ -25,13 +25,9 @@
 		}
 
 		function onError(event) {
-			console.log("event:", event);
-			console.log("event.target:", event.target)
-			console.log("event.target.f:", event.target.f);
-			console.log("event.target.f.videoData:", event.target.f.videoData);
-			// console.log("event.target.f.videoData.video_id:", event.target.f.videoData.video_id);
-			// ytPlayer.loadVideoById( event.target.f.videoData.video_id, 0, "auto" );
-			// ytPlayer.playVideo();
+			console.log('There was an error so we re-loaded the video.')
+			ytPlayer.loadVideoById( event.target.F.videoData.video_id, 0, "auto" );
+			ytPlayer.playVideo();
 		}
 
 		function mute() { return ytPlayer.mute(); }
