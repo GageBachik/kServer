@@ -14,7 +14,8 @@
 						rel: 0, // does not show related videos at the end
 						modestbranding: 1,
 						iv_load_policy: 3, // annotations not shown by default
-						controls: 0 // disables controls
+						controls: 0, // disables controls
+						enablejsapi: 1
 					},
 					events: {
 						'onReady': onPlayerReady,
@@ -32,7 +33,7 @@
 				// }
 			}
 			function onError(event) {
-				console.log("event:", event);
+				console.log("Video failed to load with error code:", event.data);
 				// console.log('There was an error so we re-loaded the video.')
 				// queue.push(event.target.F.videoData.video_id)
 			}
