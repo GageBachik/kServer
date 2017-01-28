@@ -1,58 +1,80 @@
 <html style="padding: 0; margin: 0;">
 	<head>
 		<script src="https://www.youtube.com/iframe_api"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+		<script type="text/javascript">
+			
+			$(document).on("ready",function()
+			{
+				loadvideoplayer("vxIOUJ7by6U")
+			})  
+		 
+			var yplayer;
+			function loadvideoplayer(id)
+			{
+					console.log("Loading:" + id)
+				var params = { allowScriptAccess: "always" };
+					var atts = { id: "ytPlayer" , autoplay: 1, wmode: 'transparent'};
+					swfobject.embedSWF("http://www.youtube.com/v/" + id + "?enablejsapi=1&playerapiid=yplayer&version=3&autoplay=1", "ytPlayer", "100%", "100%", "8", null, null, params, atts);
+			}
+		 
+			function onYouTubePlayerReady(event)
+			{
+				console.log("YouTube Player Ready.");
+					yplayer = document.getElementById("myytplayer");
+			}
+		</script>
 		<script>
-			var ytPlayer;
-			var queue = [];
 
-			function onYouTubeIframeAPIReady() {
-				ytPlayer = new YT.Player('ytPlayer', {
+		var ytPlayer;
 
-					videoId: 'vxIOUJ7by6U',
-					playerVars: {
-						fs: 0, // does not show the fullscreen button
-						rel: 0, // does not show related videos at the end
-						modestbranding: 1,
-						iv_load_policy: 3, // annotations not shown by default
-						controls: 0, // disables controls
-						enablejsapi: 1
-					},
-					events: {
-						'onReady': onPlayerReady,
-						// 'onStateChange': onPlayerStateChange,
-						'onError': onError
-					}
-				} );
+		// function onYouTubeIframeAPIReady() {
+		// 	ytPlayer = new YT.Player('ytPlayer', {
 
-			}
-			function onPlayerReady(){
-				// If after adding a song, the player isn't playing, start it
-				// if ( ytPlayer.getPlayerState() != 1 && queue.length > 0) { // YT.PlayerState.PLAYING == 1
-				// 	ytPlayer.loadVideoById( queue.splice(0,1), 0, "auto" );
-				// 	ytPlayer.playVideo();
-				// }
-			}
-			function onError(event) {
-				console.log("Video failed to load with error code:", event.data);
-				// console.log('There was an error so we re-loaded the video.')
-				// queue.push(event.target.F.videoData.video_id)
-			}
+		// 		videoId: 'vxIOUJ7by6U',
+		// 		playerVars: {
+		// 			fs: 0, // does not show the fullscreen button
+		// 			rel: 0, // does not show related videos at the end
+		// 			modestbranding: 1,
+		// 			iv_load_policy: 3, // annotations not shown by default
+		// 			controls: 0 // disables controls
+		// 		},
+		// 		events: {
+		// 			// 'onStateChange': onPlayerStateChange,
+		// 			'onError': onError
+		// 		}
+		// 	} );
 
-			function mute() { return ytPlayer.mute(); }
+		// }
 
-			function unMute() { return ytPlayer.unMute(); }
+		function onError(event) {
+			console.log("event:", event);
+			console.log("event.target.f.videoData.video_id:", event.target.f.videoData.video_id);
+			ytPlayer.loadVideoById( event.target.f.videoData.video_id, 0, "auto" );
+			ytPlayer.playVideo();
+		}
 
-			function isMuted() { return ytPlayer.isMuted(); }
+		function mute() { return ytPlayer.mute(); }
 
-			function setVolume(vol) { return ytPlayer.setVolume(vol); }
+		function unMute() { return ytPlayer.unMute(); }
 
-			function getVolume() { return ytPlayer.getVolume(); }
+		function isMuted() { return ytPlayer.isMuted(); }
 
-			function playVideo() { return ytPlayer.playVideo(); }
+		function setVolume(vol) { return ytPlayer.setVolume(vol); }
 
-			function loadVideoById(id, startSeconds, quality) { return ytPlayer.loadVideoById(id, startSeconds, quality); }
+		function getVolume() { return ytPlayer.getVolume(); }
 
-			function getPlayerState() { return ytPlayer.getPlayerState(); }
+		function playVideo() { return ytPlayer.playVideo(); }
+
+		function loadVideoById(id, startSeconds, quality) { return ytPlayer.loadVideoById(id, startSeconds, quality); }
+
+		function getPlayerState() { return ytPlayer.getPlayerState(); }
+		// YT.PlayerState.(unstarted?) == -1
+		// YT.PlayerState.ENDED == 0
+		// YT.PlayerState.PLAYING == 1
+		// YT.PlayerState.PAUSED == 2
+		// YT.PlayerState.BUFFERING == 3
+		// YT.PlayerState.CUED == 5
 		</script>
 	</head>
 	<body style="width: 100vw; height: 100vh; padding: 0; margin: 0;">
