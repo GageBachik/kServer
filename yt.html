@@ -1,53 +1,28 @@
 <html style="padding: 0; margin: 0;">
 	<head>
-	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 		<script src="https://www.youtube.com/iframe_api"></script>
-		<script src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
-		<script type="text/javascript">
-			
-			$(document).on("ready",function()
-			{
-				loadvideoplayer("vxIOUJ7by6U")
-			})  
-		 
-			var yplayer;
-			function loadvideoplayer(id)
-			{
-					console.log("Loading:" + id)
-				var params = { allowScriptAccess: "always" };
-					var atts = { id: "ytPlayer" , autoplay: 1, wmode: 'transparent'};
-					swfobject.embedSWF("http://www.youtube.com/v/" + id + "?enablejsapi=1&playerapiid=yplayer&version=3&autoplay=1", "ytPlayer", "100%", "100%", "8", null, null, params, atts);
-			}
-		 
-			function onYouTubePlayerReady(event)
-			{
-				console.log("YouTube Player Ready.");
-					yplayer = document.getElementById("myytplayer");
-			}
-		</script>
 		<script>
 
 		var ytPlayer;
 
-		// function onYouTubeIframeAPIReady() {
-		// 	ytPlayer = new YT.Player('ytPlayer', {
+		function onYouTubeIframeAPIReady() {
+			ytPlayer = new YT.Player('ytPlayer', {
 
-		// 		videoId: 'vxIOUJ7by6U',
-		// 		playerVars: {
-		// 			fs: 0, // does not show the fullscreen button
-		// 			rel: 0, // does not show related videos at the end
-		// 			modestbranding: 1,
-		// 			iv_load_policy: 3, // annotations not shown by default
-		// 			controls: 0 // disables controls
-		// 		},
-		// 		events: {
-		// 			// 'onStateChange': onPlayerStateChange,
-		// 			'onError': onError
-		// 		}
-		// 	} );
+				videoId: 'vxIOUJ7by6U',
+				playerVars: {
+					fs: 0, // does not show the fullscreen button
+					rel: 0, // does not show related videos at the end
+					modestbranding: 1,
+					iv_load_policy: 3, // annotations not shown by default
+					controls: 0 // disables controls
+				},
+				events: {
+					// 'onStateChange': onPlayerStateChange,
+					'onError': onError
+				}
+			} );
 
-		// }
+		}
 
 		function onError(event) {
 			console.log("event:", event);
